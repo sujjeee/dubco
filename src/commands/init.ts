@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { handleError } from "@/src/utils/handle-error";
 import { logger } from "@/src/utils/logger";
 import chalk from "chalk";
@@ -11,11 +9,6 @@ import prompts from "prompts";
 export const init = new Command()
   .name("init")
   .description("configure your dub.co authorization credentails")
-  .option(
-    "-c, --cwd <cwd>",
-    "the working directory. defaults to the current directory.",
-    process.cwd()
-  )
   .action(async () => {
     try {
       await promptForConfig();

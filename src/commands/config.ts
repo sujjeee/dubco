@@ -12,7 +12,7 @@ export const config = new Command()
       const spinner = ora("Getting config file...").start();
       const configInfo = await getConfigInfo();
       spinner.succeed("Config file retrieved");
-      console.log(JSON.stringify(configInfo, null, 2));
+      console.log(JSON.stringify(configInfo, null, 4));
     } catch (error) {
       handleError(error);
     }

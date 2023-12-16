@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+import { create } from "@/src/commands/create";
 import { init } from "@/src/commands/init";
 import { getPackageInfo } from "@/src/utils/get-package-info";
 import { Command } from "commander";
@@ -19,7 +20,7 @@ function main() {
       "display the version number"
     );
 
-  program.addCommand(init);
+  program.addCommand(init).addCommand(create);
 
   program.parse();
 }

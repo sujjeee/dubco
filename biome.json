@@ -11,7 +11,12 @@
   "linter": {
     "enabled": true,
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "nursery": {
+        "recommended": true,
+        "noUnusedImports": "warn",
+        "useAwait": "warn"
+      }
     }
   },
   "formatter": {

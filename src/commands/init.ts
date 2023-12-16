@@ -56,9 +56,6 @@ export async function promptForConfig() {
     globalConfigPath: true
   });
 
-  console.log("createConfig ", createConfig);
-  console.log("createConfig init", createConfig.all);
-
   if (!createConfig.path) {
     spinner.stop();
     handleError(new Error("Failed to create config file"));

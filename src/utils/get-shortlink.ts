@@ -1,28 +1,10 @@
-import { APIResponse, ConfigTypes, LinkOptions } from "@/src/types";
+import { APIResponse, LinkOptions } from "@/src/types";
+import { getConfigInfo } from "@/src/utils/get-config-info";
 import { handleError } from "@/src/utils/handle-error";
-import { logger } from "@/src/utils/logger";
-import chalk from "chalk";
-import Configstore from "configstore";
 import fetch from "node-fetch";
 
 export async function getShortLink({ url, shortLink }: LinkOptions) {
-  const getconfig = new Configstore("dubco.config");
-
-  console.log("getconfig", getconfig);
-  console.log("getconfig alltets", getconfig.all());
-
-  if (!getconfig) {
-    logger.warn(
-      `Configuration is missing. Please run ${chalk.green(
-        "init"
-      )} to add a dub.co credentials.`
-    );
-    process.exit(0);
-  }
-
-  const configInfo: ConfigTypes = getconfig.all();
-
-  console.log("configInfo", configInfo);
+  const configInfo = getConfigInfo();
 
   const options = {
     method: "POST",

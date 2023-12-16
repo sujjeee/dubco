@@ -1,22 +1,15 @@
-import type { APIResponse } from "@/src/types";
 import { getNanoid } from "@/src/utils/get-nanoid";
 import { getShortLink } from "@/src/utils/get-shortlink";
 import { handleError } from "@/src/utils/handle-error";
 import { logger } from "@/src/utils/logger";
 import chalk from "chalk";
 import { Command } from "commander";
-import fetch from "node-fetch";
 import ora from "ora";
 import prompts from "prompts";
 
 export const create = new Command()
   .name("create")
   .description("Create short link")
-  .option(
-    "-c, --cwd <cwd>",
-    "the working directory. defaults to the current directory.",
-    process.cwd()
-  )
   .action(async () => {
     try {
       const res = await promptForShortener();

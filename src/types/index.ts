@@ -1,11 +1,5 @@
 #!/usr/bin/env node
 
-export interface ConfigTypes {
-  authToken: string;
-  projectSlug: string;
-  domain: string;
-}
-
 export interface LinkOptions {
   url: string;
   shortLink?: string;

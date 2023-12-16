@@ -52,9 +52,8 @@ export async function promptForConfig() {
 
   const spinner = ora("Configuring...").start();
 
-  const createConfig = new Configstore("dubco.config", authorization, {
-    globalConfigPath: true
-  });
+  const createConfig = new Configstore("dubco.config");
+  createConfig.set(authorization);
 
   if (!createConfig.path) {
     spinner.stop();

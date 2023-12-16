@@ -46,9 +46,10 @@ export async function promptForShortener() {
       shortLink: promptsOptions.shortLink
     });
 
+    spinner.succeed("Short link created!");
     return generatedShortLink;
   } catch (error) {
-    spinner.fail("Error creating short link!");
+    spinner.stop();
     handleError(error);
   }
 }

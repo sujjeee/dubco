@@ -1,6 +1,6 @@
 {
   "name": "dubco",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A CLI for easily shortening URLs using the dub.co service. ✂️",
   "publishConfig": {
     "access": "public"
@@ -8,9 +8,11 @@
   "type": "module",
   "types": "./dist/index.d.ts",
   "exports": "./dist/index.js",
+  "main": "./dist/index.js",
   "bin": {
     "dubco": "./dist/index.js"
   },
+  "preferGlobal": true,
   "license": "MIT",
   "author": {
     "name": "sujjeee",
@@ -45,6 +47,7 @@
     "nanoid": "^5.0.4",
     "node-fetch": "^3.3.2",
     "ora": "^7.0.1",
+    "package-json": "^8.1.1",
     "prompts": "^2.4.2",
     "rimraf": "^5.0.5",
     "zod": "^3.22.4"

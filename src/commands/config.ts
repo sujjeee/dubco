@@ -1,8 +1,8 @@
+import { getConfigInfo } from "@/src/utils/get-config-info";
 import { handleError } from "@/src/utils/handle-error";
+import { logger } from "@/src/utils/logger";
 import { Command } from "commander";
 import ora from "ora";
-
-import { getConfigInfo } from "@/src/utils/get-config-info";
 
 export const config = new Command()
   .name("config")
@@ -12,7 +12,7 @@ export const config = new Command()
       const spinner = ora("Getting config file...").start();
       const configInfo = await getConfigInfo();
       spinner.succeed("Config file retrieved");
-      console.log(JSON.stringify(configInfo, null, 4));
+      logger.info(JSON.stringify(configInfo, null, 4));
     } catch (error) {
       handleError(error);
     }

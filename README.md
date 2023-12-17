@@ -4,12 +4,12 @@ A command line tool for easily shortening URLs using the dub.co service. ✂️
 ## Installation
 Install dubco globally to access the commands from your terminal:
 ```bash
-npm install dubco -g 
+npm install -g dubco
 ```
 or if you are using pnpm 
 
 ```bash
-pnpm install dubco -g
+pnpm install -g dubco
 ```
 
 ## Usage

@@ -1,6 +1,9 @@
 # Dubco - URL Shortener CLI
 A command line tool for easily shortening URLs using the dub.co service. ✂️
 
+## Quick Demo 
+https://github.com/sujjeee/dubco/assets/101963203/7dfdfc92-5ed8-42d1-8132-2bf455be4ae8
+
 ## Installation
 Install dubco globally to access the commands from your terminal:
 ```bash

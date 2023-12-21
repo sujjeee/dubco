@@ -1,6 +1,6 @@
 {
   "name": "dubco",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A CLI for easily shortening URLs using the dub.co service. ✂️",
   "publishConfig": {
     "access": "public"
@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/suraj/dubco.git"
+    "url": "https://github.com/sujjeee/dubco.git"
   },
   "files": ["dist"],
   "keywords": ["dubco", "dub.co", "url shortener", "sujjeee"],

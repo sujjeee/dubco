@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { config } from "@/commands/config";
+import { create } from "@/commands/create";
 import { login } from "@/commands/login";
 import { shorten } from "@/commands/shorten";
 import { getPackageInfo } from "@/utils/get-package-info";
@@ -21,7 +22,11 @@ async function main() {
       "display the version number"
     );
 
-  program.addCommand(login).addCommand(config).addCommand(shorten);
+  program
+    .addCommand(login)
+    .addCommand(config)
+    .addCommand(shorten)
+    .addCommand(create);
 
   program.parse();
 }

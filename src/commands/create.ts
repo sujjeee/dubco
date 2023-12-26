@@ -87,7 +87,7 @@ export async function runInit(option: optionSchema, config: DubConfig) {
       token: config.token
     });
 
-    const configStore = new Configstore("dubcli");
+    const configStore = new Configstore("dubco");
 
     configStore.set("project.slug", getProjectInfo[0].value.slug ?? null);
     configStore.set("domain.slug", getProjectInfo[1].value.name ?? null);

@@ -1,6 +1,6 @@
 {
   "name": "dubco",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A CLI for easily shortening URLs using the dub.co service. ✂️",
   "publishConfig": {
     "access": "public"
@@ -50,6 +50,7 @@
     "ora": "^7.0.1",
     "package-json": "^8.1.1",
     "prompts": "^2.4.2",
+    "qrcode": "^1.5.3",
     "rimraf": "^5.0.5",
     "zod": "^3.22.4"
   },
@@ -59,6 +60,7 @@
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.10.4",
     "@types/prompts": "^2.4.9",
+    "@types/qrcode": "^1.5.5",
     "ts-node": "^10.9.2",
     "tsup": "^8.0.1",
     "type-fest": "^4.8.3",

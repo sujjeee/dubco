@@ -1,3 +1,5 @@
+import os from "os";
+import path from "path";
 import { DubConfig } from "@/types";
 import { getConfig } from "@/utils/get-config";
 import { getNanoid } from "@/utils/get-nanoid";
@@ -8,11 +10,15 @@ import chalk from "chalk";
 import { Command } from "commander";
 import ora from "ora";
 import prompts from "prompts";
+import QRCode from "qrcode";
+import type { QRCodeToFileOptions } from "qrcode";
 import { z } from "zod";
 
 const shortenOptionsSchema = z.object({
   url: z.string().min(3, "URL must be at least 3 characters long"),
-  key: z.string().min(1, "Key must be at least 1 character long")
+  key: z.string().min(1, "Key must be at least 1 character long"),
+  qrcode: z.boolean(),
+  terminal: z.boolean()
 });
 
 type optionSchema = z.infer<typeof shortenOptionsSchema>;
@@ -22,7 +28,9 @@ export const shorten = new Command()
   .description("generate a shortened link")
   .argument("[url]", "url to be shortened")
   .argument("[key]", "short key to customize the link", getNanoid())
-  .action(async (url, key) => {
+  .option("-qr, --qrcode", "generate qrcode for shortened url", false)
+  .option("-t, --terminal", "draw qrcodes in terminal only", false)
+  .action(async (url, key, opts) => {
     try {
       const inputs = { url, key };
 
@@ -76,13 +84,54 @@ export const shorten = new Command()
         givenDetails = promptsOptions;
       }
 
-      const options = shortenOptionsSchema.parse(givenDetails);
+      const options = shortenOptionsSchema.parse({ ...givenDetails, ...opts });
 
       const link = await runInit(options, config);
+
+      if (!link) {
+        logger.warn(
+          "Something went wrong. Please try again later or try to logging again."
+        );
+        logger.info("");
+        process.exit(0);
+      }
 
       logger.info("");
       logger.info(`${chalk.green(link)}`);
       logger.info("");
+
+      if (options.qrcode && !options.terminal) {
+        const downloadFolder = path.join(os.homedir(), "Downloads");
+        const fileName = `dub-${givenDetails.key}.png`;
+
+        const filePath = path.join(downloadFolder, fileName);
+
+        const opts: QRCodeToFileOptions = {
+          type: "png",
+          width: 800
+        };
+
+        QRCode.toFile(filePath, link, opts, (err) => {
+          if (err) throw err;
+          logger.success("QR code saved!");
+          logger.info("");
+        });
+      }
+
+      if (options.qrcode && options.terminal) {
+        QRCode.toString(
+          link,
+          {
+            type: "terminal",
+            small: true
+          },
+          (err, qr) => {
+            if (err) throw err;
+            logger.success(qr);
+            logger.info("");
+          }
+        );
+      }
       if (!config.domain.verified) {
         logger.warn(
           `Domain is not verified. Please visit ${chalk.green(

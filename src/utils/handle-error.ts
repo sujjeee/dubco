@@ -1,6 +1,14 @@
-import { logger } from "@/src/utils/logger";
+import { logger } from "@/utils/logger";
+import { z } from "zod";
 
 export function handleError(error: unknown) {
+  if (error instanceof z.ZodError) {
+    for (const issue of error.issues) {
+      logger.error(issue.message);
+    }
+    process.exit(1);
+  }
+
   if (typeof error === "string") {
     logger.error(error);
     process.exit(1);

@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import { config } from "@/src/commands/config";
-import { create } from "@/src/commands/create";
-import { init } from "@/src/commands/init";
-import { getPackageInfo } from "@/src/utils/get-package-info";
+import { config } from "@/commands/config";
+import { login } from "@/commands/login";
+import { shorten } from "@/commands/shorten";
+import { getPackageInfo } from "@/utils/get-package-info";
 import { Command } from "commander";
 
 process.on("SIGINT", () => process.exit(0));
@@ -13,7 +13,7 @@ async function main() {
   const packageInfo = await getPackageInfo();
 
   const program = new Command()
-    .name("dubco")
+    .name("dub")
     .description("A CLI for shortening url.")
     .version(
       packageInfo.version || "1.0.0",
@@ -21,7 +21,7 @@ async function main() {
       "display the version number"
     );
 
-  program.addCommand(init).addCommand(create).addCommand(config);
+  program.addCommand(login).addCommand(config).addCommand(shorten);
 
   program.parse();
 }

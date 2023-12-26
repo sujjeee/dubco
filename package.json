@@ -22,8 +22,15 @@
     "type": "git",
     "url": "https://github.com/sujjeee/dubco.git"
   },
-  "files": ["dist"],
-  "keywords": ["dubco", "dub.co", "url shortener", "sujjeee"],
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "dubco",
+    "dub.co",
+    "url shortener",
+    "sujjeee"
+  ],
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
@@ -44,6 +51,7 @@
     "commander": "^11.1.0",
     "configstore": "^6.0.0",
     "fs-extra": "^11.2.0",
+    "json-colorizer": "^2.2.2",
     "nanoid": "^5.0.4",
     "node-fetch": "^3.3.2",
     "ora": "^7.0.1",

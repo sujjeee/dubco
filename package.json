@@ -1,6 +1,6 @@
 {
   "name": "dubco",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "A CLI for easily shortening URLs using the dub.co service. ✂️",
   "publishConfig": {
     "access": "public"

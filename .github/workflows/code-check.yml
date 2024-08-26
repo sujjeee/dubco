@@ -27,21 +27,22 @@ jobs:
     runs-on: ubuntu-latest
     name: Publish
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - name: Install Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           registry-url: "https://registry.npmjs.org"
 
-      - uses: pnpm/action-setup@v2.2.4
-        name: Install pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v3
         id: pnpm-install
         with:
-          version: 8.11.0
+          version: 9.0.6
           run_install: false
 
       - name: Get pnpm store directory
@@ -49,8 +50,8 @@ jobs:
         run: |
           echo "pnpm_cache_dir=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
+      - name: Setup pnpm cache
+        uses: actions/cache@v4
         with:
           path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}

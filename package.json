@@ -22,8 +22,17 @@
     "type": "git",
     "url": "https://github.com/sujjeee/dubco.git"
   },
-  "files": ["dist"],
-  "keywords": ["dub", "dubco", "dub.co", "cli", "url shortener", "sujjeee"],
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "dub",
+    "dubco",
+    "dub.co",
+    "cli",
+    "url shortener",
+    "sujjeee"
+  ],
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
@@ -45,25 +54,25 @@
     "configstore": "^6.0.0",
     "fs-extra": "^11.2.0",
     "json-colorizer": "^2.2.2",
-    "nanoid": "^5.0.4",
+    "nanoid": "^5.0.7",
     "node-fetch": "^3.3.2",
     "ora": "^7.0.1",
     "package-json": "^8.1.1",
     "prompts": "^2.4.2",
-    "qrcode": "^1.5.3",
-    "rimraf": "^5.0.5",
-    "zod": "^3.22.4"
+    "qrcode": "^1.5.4",
+    "rimraf": "^5.0.10",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@biomejs/biome": "1.4.1",
     "@types/configstore": "^6.0.2",
     "@types/fs-extra": "^11.0.4",
-    "@types/node": "^20.10.4",
+    "@types/node": "^20.16.1",
     "@types/prompts": "^2.4.9",
     "@types/qrcode": "^1.5.5",
     "ts-node": "^10.9.2",
-    "tsup": "^8.0.1",
-    "type-fest": "^4.8.3",
-    "typescript": "^5.3.3"
+    "tsup": "^8.2.4",
+    "type-fest": "^4.25.0",
+    "typescript": "^5.5.4"
   }
 }

@@ -22,7 +22,7 @@ dependencies:
     version: 2.2.2
   nanoid:
     specifier: ^5.0.4
-    version: 5.0.4
+    version: 5.0.7
   node-fetch:
     specifier: ^3.3.2
     version: 3.3.2
@@ -1450,8 +1450,8 @@ packages:
       thenify-all: 1.6.0
     dev: true
 
-  /nanoid@5.0.4:
-    resolution: {integrity: sha512-vAjmBf13gsmhXSgBrtIclinISzFFy22WwCYoyilZlsrRXNIHSwgFQ1bEdjRwMT3aoadeIF6HMuDRlOxzfXV8ig==}
+  /nanoid@5.0.7:
+    resolution: {integrity: sha512-oLxFY2gd2IqnjcYyOXD8XGCftpGtZP2AbHbOkthDkvRywH5ayNtPVy9YlOPcHckXzbLTCHpkb7FB+yuxKV13pQ==}
     engines: {node: ^18 || >=20}
     hasBin: true
     dev: false

@@ -1,82 +1,73 @@
-import type { DubConfig } from "@/types";
-import { getUserInfo } from "@/utils/auth/get-user-info";
-import { handleError } from "@/utils/handle-error";
-import { logger } from "@/utils/logger";
-import { getProjectsInfo } from "@/utils/projects";
-import chalk from "chalk";
-import { Command } from "commander";
-import Configstore from "configstore";
-import ora from "ora";
-import { z } from "zod";
+import type { DubConfig } from "@/types"
+import { handleError } from "@/utils/handle-error"
+import { logger } from "@/utils/logger"
+import chalk from "chalk"
+import { Command } from "commander"
+import Configstore from "configstore"
+import ora from "ora"
+import prompts from "prompts"
+import { z } from "zod"
 
 const loginOptionsSchema = z.object({
-  token: z.string().min(8, "Token must be at least 8 characters long")
-});
+  key: z.string().min(8, { message: "Please use a valid workspace API key" })
+})
 
 export const login = new Command()
   .name("login")
-  .description("configure your dub.co authorization credentials")
-  .argument("<token>", "api token for authentication")
-  .action(async (token) => {
-    const spinner = ora("Verifying user credentials...").start();
+  .description("Configure your workspace key")
+  .argument("[key]", "Workspace API key for authentication")
+  .action(async (key) => {
     try {
-      const options = loginOptionsSchema.parse({ token });
-      const userInfo = await getUserInfo({ token: options.token });
+      let credentials = { key }
 
-      if (!userInfo) {
-        spinner.stop();
-        logger.warn(
-          `Please visit ${chalk.green(
-            "https://dub.co"
-          )} to generate your token.`
-        );
-        process.exit(0);
+      if (!credentials.key) {
+        credentials = await prompts(
+          [
+            {
+              type: "text",
+              name: "key",
+              message: "Enter your workspace API key:",
+              validate: (value) => {
+                const result = loginOptionsSchema.shape.key.safeParse(value)
+                return result.success || result.error.errors[0].message
+              }
+            }
+          ],
+          {
+            onCancel: () => {
+              logger.info("")
+              logger.warn("You cancelled the prompt.")
+              logger.info("")
+              process.exit(0)
+            }
+          }
+        )
       }
 
-      const projectsInfo = await getProjectsInfo({ token: options.token });
+      const validatedData = loginOptionsSchema.parse(credentials)
 
-      const defaultProject = projectsInfo ? projectsInfo[0] : null;
-      const defaultDomain = projectsInfo
-        ? projectsInfo[0]?.domains.find((domain) => domain.primary) ||
-          projectsInfo[0]?.domains[0]
-        : null;
-
-      const defaultInfo = {
-        project: {
-          slug: defaultProject?.slug ?? null
-        },
-        domain: {
-          slug: defaultDomain?.slug ?? null,
-          verified: defaultDomain?.verified ?? null
-        }
-      };
+      const spinner = ora("configuring workspace key").start()
 
       const configInfo: DubConfig = {
-        token: options.token,
-        ...userInfo,
-        ...defaultInfo
-      };
-
-      const config = new Configstore("dubco");
-
-      if (!config.path) {
-        spinner.stop();
-        handleError(new Error("Failed to create config file."));
+        key: validatedData.key.trim(),
+        domain: "dub.sh"
       }
 
-      // 1: clear the config
-      config.clear();
+      const config = new Configstore("dubcli")
+      config.set(configInfo)
 
-      // 2: set new dub credentials
-      config.set(configInfo);
+      if (!config.path) {
+        handleError(new Error("Failed to create config file"))
+      }
 
-      spinner.succeed("Done");
+      spinner.succeed("Done")
 
-      logger.info("");
-      logger.info(`${chalk.green("Success!")} Dub authentication completed.`);
-      logger.info("");
+      logger.info("")
+      logger.info(
+        `${chalk.green("Success!")} Workspace API key configured successfully.`
+      )
+      logger.info("")
     } catch (error) {
-      spinner.stop();
-      handleError(error);
+      handleError(error)
     }
-  });
+  })

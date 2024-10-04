@@ -1,141 +1,88 @@
-export interface UserInfo {
-  id: string;
-  name: string;
-  email: string;
-  emailVerified: boolean | null;
-  image: string;
-  createdAt: Date;
+export interface DubConfig {
+  key: string
+  domain?: string
 }
 
-export interface Project {
-  id: string;
-  name: string;
-  slug: string;
-  logo: string | null;
-  usage: number;
-  usageLimit: number;
-  plan: string;
-  stripeId: string | null;
-  billingCycleStart: number;
-  monitoringId: string | null;
-  createdAt: Date;
-  updatedAt: Date;
-  domains: {
-    id: string;
-    slug: string;
-    verified: boolean;
-    target: string | null;
-    type: string;
-    placeholder: string | null;
-    description: string | null;
-    projectId: string;
-    primary: boolean;
-    clicks: number;
-    lastClicked: Date | null;
-    lastChecked: Date;
-    createdAt: Date;
-    updatedAt: Date;
-  }[];
+export type GetDomain = {
+  id: string
+  slug: string
+  verified: boolean
+  primary: boolean
+  archived: boolean
+  placeholder: string
+  expiredUrl: string
+  createdAt: string
+  updatedAt: string
+  registeredDomain: {
+    id: string
+    createdAt: string
+    expiresAt: string
+  }
 }
 
-export interface Domain {
-  slug: string;
-  verified: boolean;
-  primary: boolean;
-  target: string | null;
-  type: string;
-  placeholder: string | null;
-  clicks: number;
+export interface CreateLinkProps {
+  url: string
+  key?: string
 }
 
-export interface DubConfig extends UserInfo {
-  project: {
-    slug: Project["slug"] | null;
-  };
-  domain: {
-    slug?: Project["domains"][0]["slug"] | null;
-    verified?: boolean | null;
-  };
-  token: string;
+type tag = {
+  id: string
+  name: string
+  color: string
 }
 
-export interface LinkOptions {
-  url: string;
-  shortLink?: string;
-  config: DubConfig;
+type Geo<T = string> = {
+  [key: string]: T
 }
 
-export interface APIResponse {
-  id: string;
-  domain: string;
-  key: string;
-  url: string;
-  archived: boolean;
-  expiresAt: string;
-  password: string;
-  proxy: boolean;
-  title: string;
-  description: string;
-  image: string;
-  rewrite: boolean;
-  ios: string;
-  android: string;
-  geo: Record<string, unknown>;
-  publicStats: boolean;
-  tagId: string;
-  comments: string;
-  utm_source: string;
-  utm_medium: string;
-  utm_campaign: string;
-  utm_term: string;
-  utm_content: string;
-  userId: string;
-  projectId: string;
-  clicks: number;
-  lastClicked: string;
-  createdAt: string;
-  updatedAt: string;
+export type GetLink = {
+  id: string
+  domain: string
+  key: string
+  externalId: string
+  url: string
+  trackConversion: boolean
+  archived: boolean
+  expiresAt: string
+  expiredUrl: string
+  password: string
+  proxy: boolean
+  title: string
+  description: string
+  image: string
+  video: string
+  rewrite: boolean
+  doIndex: boolean
+  ios: string
+  android: string
+  geo: Geo
+  publicStats: boolean
+  tagId: string
+  tags: tag[]
+  comments: string
+  shortLink: string
+  qrCode: string
+  utm_source: string
+  utm_medium: string
+  utm_campaign: string
+  utm_term: string
+  utm_content: string
+  userId: string
+  workspaceId: string
+  clicks: number
+  lastClicked: string
+  leads: number
+  sales: number
+  saleAmount: number
+  createdAt: string
+  updatedAt: string
+  projectId: string
 }
 
-export interface DomainInfo {
-  slug: string;
-  verified: boolean;
-  primary: boolean;
-  target: null | string;
-  type: string;
-  placeholder: string | null;
-  clicks: number;
-}
-
-export interface CreatedProject {
-  status: string;
-  value: {
-    id: string;
-    name: string;
-    slug: string;
-    logo: null;
-    usage: number;
-    usageLimit: number;
-    plan: string;
-    stripeId: null;
-    billingCycleStart: number;
-    monitoringId: null;
-    createdAt: string;
-    updatedAt: string;
-  };
-}
-
-export interface CreatedDomain {
-  status: string;
-  value: {
-    name: string;
-    apexName: string;
-    projectId: string;
-    redirect: string | null;
-    redirectStatusCode: number | null;
-    gitBranch: string | null;
-    updatedAt: number;
-    createdAt: number;
-    verified: boolean;
-  };
+export interface APIError {
+  error: {
+    code: string
+    message: string
+    doc_url: string
+  }
 }

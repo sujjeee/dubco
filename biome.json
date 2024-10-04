@@ -25,7 +25,8 @@
   },
   "formatter": {
     "indentWidth": 2,
-    "indentStyle": "space"
+    "indentStyle": "space",
+    "ignore": ["node_modules", "dist"]
   },
   "javascript": {
     "formatter": {

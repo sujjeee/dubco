@@ -14,12 +14,12 @@ async function main() {
   const packageInfo = await getPackageInfo()
 
   const program = new Command()
-    .name("dub")
+    .name("dubco")
     .description("a cli for shortening url")
     .version(
       packageInfo.version || "1.0.0",
       "-v, --version",
-      "display the version number"
+      "display the version number",
     )
 
   program

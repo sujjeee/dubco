@@ -1,6 +1,6 @@
 {
   "name": "dubco",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A CLI for easily shortening URLs using the dub.co service. ✂️",
   "publishConfig": {
     "access": "public"
@@ -10,7 +10,7 @@
   "exports": "./dist/index.js",
   "main": "./dist/index.js",
   "bin": {
-    "dub": "./dist/index.js"
+    "dubco": "./dist/index.js"
   },
   "preferGlobal": true,
   "license": "MIT",

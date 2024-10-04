@@ -19,7 +19,7 @@ async function main() {
     .version(
       packageInfo.version || "1.0.0",
       "-v, --version",
-      "display the version number",
+      "display the version number"
     )
 
   program

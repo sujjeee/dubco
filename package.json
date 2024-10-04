@@ -22,17 +22,8 @@
     "type": "git",
     "url": "https://github.com/sujjeee/dubco.git"
   },
-  "files": [
-    "dist"
-  ],
-  "keywords": [
-    "dub",
-    "dubco",
-    "dub.co",
-    "cli",
-    "url shortener",
-    "sujjeee"
-  ],
+  "files": ["dist"],
+  "keywords": ["dub", "dubco", "dub.co", "cli", "url shortener", "sujjeee"],
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",

@@ -4,7 +4,7 @@ A command line tool for easily shortening URLs using the dub.co service. ✂️
 
 ## Quick Demo
 
-https://github.com/user-attachments/assets/96f60f50-f7c7-456c-a805-345ac27a06d4
+https://github.com/user-attachments/assets/a48a345d-00b5-4faa-99e0-36156893032e
 
 > **Warning**
 > Demo video uses 'dub', but you need to use 'dubco'.
